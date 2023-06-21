@@ -7,11 +7,12 @@ from backend import electricity_consumption as elc
 
 # st.set_page_config(layout="wide")
 
-power_input = st.number_input(label='Heating power, kw @ -23C: ')
 power_temp = st.number_input(label='Lowest temperature used for power calculation, C: ', value=-23)
 heatpump_lower_temp = st.number_input(label='Heatpump lowest working temperature, C: ', value=-10)
+power_input = st.number_input(label=f'Heating power, kw @ {power_temp}C: ')
 
-st.text(f'Power @ -10C outside (interpolated): {round(hp(power=power_input, lower_t=heatpump_lower_temp, temp=power_temp), 2)} kW')
+
+st.text(f'Power @ {heatpump_lower_temp}C outside (interpolated): {round(hp(power=power_input, lower_t=heatpump_lower_temp, temp=power_temp), 2)} kW')
 
 st.subheader('Without heatpump')
 energy_no_hp = ec(power=power_input, temp=power_temp)
