@@ -42,7 +42,3 @@ def gas_price(gas):
 
 def electricity_consumption(energy):
     return round((energy / COP), 2)
-
-
-
-
