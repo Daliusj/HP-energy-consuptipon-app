@@ -1,23 +1,26 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
+import psychrochart
 
-x = []
-y = []
+# Define chart limits
+chart_limits = {
+    'db': [10, 35],           # Dry-bulb temperature limits, deg C
+    'wb': [8, 28],            # Wet-bulb temperature limits, deg C
+    'p': [0.1, 2],            # Pressure limits, atm
+    'r': [0, 100],            # Relative humidity limits, %
+    'tdp': [5, 30],           # Dew point temperature limits, deg C
+    'h': [10, 140],           # Enthalpy limits, kJ/kg
+    'w': [0, 0.03],           # Humidity ratio limits, kg H2O/kg dry air
+    'v': [0.8, 1.05],         # Specific volume limits, m3/kg dry air
+    'tdb_delta': 5,           # Dry-bulb temperature step, deg C
+    'p_delta': 0.01,          # Pressure step, atm
+    'tdb_count': 26,          # Number of dry-bulb temperature steps
+    'p_count': 101,           # Number of pressure steps
+}
 
-df_temp = pd.read_csv('Temp_Output_hourly.csv')
-for index, row in df_temp.iterrows():
-    x.append(float(row['Temperature']))
+# Create psychrometric chart
+chart = psychrochart.PsychroChart(chart_limits)
 
-df_power = pd.read_csv('power_output.csv')
-for index, row in df_power.iterrows():
-    y.append(float(row['0']))
+# Add data points to chart
+chart.plot(ax=)
 
-plt.plot(x, y);
-
-plt.xlabel('Lauko oro temp, C')
-plt.ylabel('Galia, kW')
-
-plt.title('Galios')
-
-plt.show()
+# Show chart
+chart.show()
