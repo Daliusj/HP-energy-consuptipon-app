@@ -10,6 +10,8 @@ GAS_PRICE = 1.197
 # COP@-10C
 COP = 2.4
 
+df = pd.read_csv('Temp_Output_hourly.csv')
+
 
 def heatpump_power(power, lower_t=20, temp=-23):
     x = [temp, 20]
@@ -18,7 +20,6 @@ def heatpump_power(power, lower_t=20, temp=-23):
 
 
 def energy_consumption(power, lower_t=20, temp=-23):
-    df = pd.read_csv('Temp_Output_hourly.csv')
     x = [temp, 20]
     y = [power, 0]
     heat_hourly = []
@@ -27,8 +28,6 @@ def energy_consumption(power, lower_t=20, temp=-23):
             x_new = float(row['Temperature'])
             y_new = np.interp(x_new, x, y)
             heat_hourly.append(y_new)
-    df2 = pd.DataFrame(heat_hourly)
-    df2.to_csv('power_output.csv', index=False)
     return round(sum(heat_hourly), 2)
 
 
